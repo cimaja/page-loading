@@ -27,7 +27,7 @@ const WebGLClouds = ({ prefersReducedMotion }: { prefersReducedMotion: boolean }
   const animationRef = useRef<number | null>(null);
   const programRef = useRef<WebGLProgram | null>(null);
   const startTimeRef = useRef(Date.now());
-  const uniformsRef = useRef<any>({});
+  const uniformsRef = useRef<Record<string, WebGLUniformLocation | null>>({});
 
   // Fixed cloud parameters - adjusted for better color visibility
   const cloudSpeed = 0.6;
@@ -247,30 +247,31 @@ interface LoadingAnimationProps {
   className?: string;
 }
 
+// Types for animation elements
+interface SparkConfig {
+  id: number;
+  x: number;
+  y: number;
+  size: number;
+  opacity: number;
+  duration: number;
+  delay: number;
+  color: string;
+  pulseIntensity: number;
+}
+
 export default function LoadingAnimation({ className = "" }: LoadingAnimationProps) {
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  
-  // Generate advanced cloud positions and properties
-  const generateAdvancedClouds = (count = 8) => {
-    return Array.from({ length: count }, (_, i) => ({
-      id: i,
-      x: Math.random() * 120 - 10,
-      y: Math.random() * 80 + 10,
-      scale: 0.6 + Math.random() * 0.8,
-      opacity: 0.15 + Math.random() * 0.25,
-      duration: 25 + Math.random() * 20,
-      delay: Math.random() * 10,
-      rotationSpeed: 0.2 + Math.random() * 0.3,
-      waveAmplitude: 10 + Math.random() * 20,
-      waveFrequency: 0.8 + Math.random() * 0.4
-    }));
-  };
+  const [sparks, setSparks] = useState<SparkConfig[]>([]);
+  const [isClientMounted, setIsClientMounted] = useState(false);
 
   // Generate enhanced sparks
-  const generateEnhancedSparks = (count = 15) => {
+  const generateEnhancedSparks = (count = 15): SparkConfig[] => {
+    const sparkColors: readonly string[] = ['#e8d5f2', '#f2e8f5', '#e8f0fe', '#f0e8ff', '#ffffff'] as const;
+    
     return Array.from({ length: count }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
@@ -279,13 +280,16 @@ export default function LoadingAnimation({ className = "" }: LoadingAnimationPro
       opacity: 0.4 + Math.random() * 0.6,
       duration: 3 + Math.random() * 3,
       delay: Math.random() * 5,
-      color: ['#e8d5f2', '#f2e8f5', '#e8f0fe', '#f0e8ff', '#ffffff'][Math.floor(Math.random() * 5)],
+      color: sparkColors[Math.floor(Math.random() * sparkColors.length)],
       pulseIntensity: 0.3 + Math.random() * 0.4
     }));
   };
 
-  const [clouds] = useState(generateAdvancedClouds);
-  const [sparks] = useState(generateEnhancedSparks);
+  // Initialize random elements only on client to prevent hydration mismatch
+  useEffect(() => {
+    setIsClientMounted(true);
+    setSparks(generateEnhancedSparks());
+  }, []);
 
   // Check for reduced motion preference
   useEffect(() => {
@@ -361,8 +365,9 @@ export default function LoadingAnimation({ className = "" }: LoadingAnimationPro
                 background: 'radial-gradient(circle, rgba(135, 206, 235, 0.5) 0%, rgba(135, 206, 235, 0.25) 50%, transparent 70%)',
                 borderRadius: '50%',
                 filter: 'blur(70px)',
-                animation: 'morphingBlob2 25s ease-in-out infinite',
-                transformOrigin: 'center'
+                animation: 'morphingBlob2 25s cubic-bezier(0.4, 0.0, 0.6, 1) infinite',
+                transformOrigin: 'center',
+                willChange: 'transform, opacity'
               }}
             />
 
@@ -375,8 +380,9 @@ export default function LoadingAnimation({ className = "" }: LoadingAnimationPro
                 background: 'radial-gradient(circle, rgba(255, 215, 0, 0.45) 0%, rgba(255, 215, 0, 0.2) 60%, transparent 80%)',
                 borderRadius: '50%',
                 filter: 'blur(90px)',
-                animation: 'morphingBlob3 30s ease-in-out infinite',
-                transformOrigin: 'center'
+                animation: 'morphingBlob3 30s cubic-bezier(0.4, 0.0, 0.6, 1) infinite',
+                transformOrigin: 'center',
+                willChange: 'transform, opacity'
               }}
             />
 
@@ -389,8 +395,9 @@ export default function LoadingAnimation({ className = "" }: LoadingAnimationPro
                 background: 'radial-gradient(circle, rgba(221, 160, 221, 0.5) 0%, rgba(221, 160, 221, 0.3) 45%, transparent 75%)',
                 borderRadius: '50%',
                 filter: 'blur(75px)',
-                animation: 'morphingBlob4 22s ease-in-out infinite',
-                transformOrigin: 'center'
+                animation: 'morphingBlob4 22s cubic-bezier(0.4, 0.0, 0.6, 1) infinite',
+                transformOrigin: 'center',
+                willChange: 'transform, opacity'
               }}
             />
 
@@ -403,8 +410,9 @@ export default function LoadingAnimation({ className = "" }: LoadingAnimationPro
                 background: 'radial-gradient(circle, rgba(106, 90, 205, 0.45) 0%, rgba(106, 90, 205, 0.25) 55%, transparent 80%)',
                 borderRadius: '50%',
                 filter: 'blur(60px)',
-                animation: 'morphingBlob5 28s ease-in-out infinite',
-                transformOrigin: 'center'
+                animation: 'morphingBlob5 28s cubic-bezier(0.4, 0.0, 0.6, 1) infinite',
+                transformOrigin: 'center',
+                willChange: 'transform, opacity'
               }}
             />
 
@@ -417,8 +425,9 @@ export default function LoadingAnimation({ className = "" }: LoadingAnimationPro
                 background: 'radial-gradient(circle, rgba(186, 85, 211, 0.47) 0%, rgba(186, 85, 211, 0.28) 50%, transparent 75%)',
                 borderRadius: '50%',
                 filter: 'blur(85px)',
-                animation: 'morphingBlob6 35s ease-in-out infinite',
-                transformOrigin: 'center'
+                animation: 'morphingBlob6 35s cubic-bezier(0.4, 0.0, 0.6, 1) infinite',
+                transformOrigin: 'center',
+                willChange: 'transform, opacity'
               }}
             />
           </>
@@ -444,7 +453,7 @@ export default function LoadingAnimation({ className = "" }: LoadingAnimationPro
 
 
       {/* Enhanced Sparkling Effects */}
-      {!prefersReducedMotion && sparks.map((spark) => (
+      {!prefersReducedMotion && isClientMounted && sparks.map((spark) => (
         <div
           key={spark.id}
           className="absolute"
@@ -481,7 +490,7 @@ export default function LoadingAnimation({ className = "" }: LoadingAnimationPro
       ))}
 
       {/* Ambient Light Particles */}
-      {!prefersReducedMotion && Array.from({ length: 6 }).map((_, i) => (
+      {!prefersReducedMotion && isClientMounted && Array.from({ length: 6 }).map((_, i) => (
         <div
           key={`ambient-${i}`}
           className="absolute rounded-full"
