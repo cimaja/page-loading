@@ -8,6 +8,8 @@ const nextConfig: NextConfig = {
   // GitHub Pages configuration
   output: 'export',
   trailingSlash: true,
+  basePath: '/page-loading',
+  assetPrefix: '/page-loading/',
   images: {
     unoptimized: true
   },
