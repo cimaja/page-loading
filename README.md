@@ -14,7 +14,6 @@ A premium loading experience featuring procedural WebGL clouds over morphing lav
 - ✅ **Accessibility**: Full `prefers-reduced-motion` support with CSS fallbacks
 - ✅ **SSR Safe**: Hydration-safe implementation for production deployment
 - ✅ **TypeScript**: Full type safety with strict mode enabled
-- ✅ **Error Boundaries**: Production-ready error handling
 - ✅ **Security**: Security headers and production optimizations
 
 ## 🚀 Quick Start
