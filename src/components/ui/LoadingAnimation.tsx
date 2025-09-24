@@ -326,27 +326,108 @@ export default function LoadingAnimation({ className = "" }: LoadingAnimationPro
     <div className={`relative w-full h-screen overflow-hidden ${className}`}>
       {/* Multi-layered Animated Background */}
       <div className="absolute inset-0">
-        {/* Primary morphing gradient */}
+        {/* Base gradient background */}
         <div 
           className={`absolute inset-0 ${
             prefersReducedMotion 
               ? 'bg-gradient-to-br from-purple-200 via-pink-100 to-blue-100' 
-              : ''
+              : 'bg-gradient-to-br from-purple-100 via-pink-50 to-blue-50'
           }`}
-          style={{
-            background: prefersReducedMotion 
-              ? undefined 
-              : 'linear-gradient(-45deg, #D8D1F2, #FCD0D5, #E8D5F2, #F2C8D1, #FCD0D5, #D8D1F2)',
-            backgroundSize: '400% 400%',
-            animation: prefersReducedMotion ? undefined : 'colorMorphAdvanced 12s ease-in-out infinite',
-            filter: 'saturate(1.3) brightness(1.1)' // Enhanced color vibrancy
-          }}
         />
 
-        {/* Secondary overlay gradient for depth */}
+        {/* Morphing color blobs */}
+        {!prefersReducedMotion && (
+          <>
+            {/* Purple blob */}
+            <div 
+              className="absolute"
+              style={{
+                width: '600px',
+                height: '600px',
+                background: 'radial-gradient(circle, rgba(138, 43, 226, 0.55) 0%, rgba(138, 43, 226, 0.3) 40%, transparent 70%)',
+                borderRadius: '50%',
+                filter: 'blur(80px)',
+                animation: 'morphingBlob1 20s ease-in-out infinite',
+                transformOrigin: 'center'
+              }}
+            />
+
+            {/* Blue blob */}
+            <div 
+              className="absolute"
+              style={{
+                width: '500px',
+                height: '500px',
+                background: 'radial-gradient(circle, rgba(135, 206, 235, 0.5) 0%, rgba(135, 206, 235, 0.25) 50%, transparent 70%)',
+                borderRadius: '50%',
+                filter: 'blur(70px)',
+                animation: 'morphingBlob2 25s ease-in-out infinite',
+                transformOrigin: 'center'
+              }}
+            />
+
+            {/* Yellow blob */}
+            <div 
+              className="absolute"
+              style={{
+                width: '450px',
+                height: '450px',
+                background: 'radial-gradient(circle, rgba(255, 215, 0, 0.45) 0%, rgba(255, 215, 0, 0.2) 60%, transparent 80%)',
+                borderRadius: '50%',
+                filter: 'blur(90px)',
+                animation: 'morphingBlob3 30s ease-in-out infinite',
+                transformOrigin: 'center'
+              }}
+            />
+
+            {/* Pink blob */}
+            <div 
+              className="absolute"
+              style={{
+                width: '550px',
+                height: '550px',
+                background: 'radial-gradient(circle, rgba(221, 160, 221, 0.5) 0%, rgba(221, 160, 221, 0.3) 45%, transparent 75%)',
+                borderRadius: '50%',
+                filter: 'blur(75px)',
+                animation: 'morphingBlob4 22s ease-in-out infinite',
+                transformOrigin: 'center'
+              }}
+            />
+
+            {/* Lavender blob */}
+            <div 
+              className="absolute"
+              style={{
+                width: '400px',
+                height: '400px',
+                background: 'radial-gradient(circle, rgba(106, 90, 205, 0.45) 0%, rgba(106, 90, 205, 0.25) 55%, transparent 80%)',
+                borderRadius: '50%',
+                filter: 'blur(60px)',
+                animation: 'morphingBlob5 28s ease-in-out infinite',
+                transformOrigin: 'center'
+              }}
+            />
+
+            {/* Orchid blob */}
+            <div 
+              className="absolute"
+              style={{
+                width: '480px',
+                height: '480px',
+                background: 'radial-gradient(circle, rgba(186, 85, 211, 0.47) 0%, rgba(186, 85, 211, 0.28) 50%, transparent 75%)',
+                borderRadius: '50%',
+                filter: 'blur(85px)',
+                animation: 'morphingBlob6 35s ease-in-out infinite',
+                transformOrigin: 'center'
+              }}
+            />
+          </>
+        )}
+
+        {/* Subtle overlay for depth */}
         {!prefersReducedMotion && (
           <div 
-            className="absolute inset-0 opacity-30"
+            className="absolute inset-0 opacity-20"
             style={{
               background: 'radial-gradient(circle at 30% 70%, rgba(216, 209, 242, 0.4) 0%, transparent 50%), radial-gradient(circle at 70% 30%, rgba(252, 208, 213, 0.3) 0%, transparent 50%)',
               animation: 'breathingGlow 8s ease-in-out infinite alternate'
