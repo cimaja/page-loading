@@ -2,6 +2,9 @@
 
 A premium loading experience featuring procedural WebGL clouds over morphing lavender-pink gradient backgrounds with elegant educational text transitions.
 
+## 🌐 Live Preview
+**[View Live Demo →](https://cimaja.github.io/page-loading/)**
+
 ## 🎨 Features
 
 - ✅ **Advanced WebGL Shaders**: Procedural cloud generation using Fractional Brownian Motion
@@ -97,6 +100,11 @@ npx vercel
 # Deploy
 npx vercel --prod
 ```
+
+### GitHub Pages (Auto-deployed)
+
+The project is automatically deployed to GitHub Pages on every push to `main`:
+**[https://cimaja.github.io/page-loading/](https://cimaja.github.io/page-loading/)**
 
 ### Other Platforms
 
