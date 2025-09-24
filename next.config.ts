@@ -5,6 +5,13 @@ const nextConfig: NextConfig = {
   compress: true,
   poweredByHeader: false,
   
+  // GitHub Pages configuration
+  output: 'export',
+  trailingSlash: true,
+  images: {
+    unoptimized: true
+  },
+  
   // Performance optimizations
   experimental: {
     // Enable optimized package imports
@@ -15,33 +22,6 @@ const nextConfig: NextConfig = {
   compiler: {
     // Remove console logs in production
     removeConsole: process.env.NODE_ENV === 'production',
-  },
-  
-  // Headers for security and performance
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY'
-          },
-          {
-            key: 'X-Content-Type-Options', 
-            value: 'nosniff'
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin'
-          },
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable'
-          }
-        ],
-      },
-    ]
   },
 };
 
