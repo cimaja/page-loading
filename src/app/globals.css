@@ -424,3 +424,87 @@ body {
     display: none;
   }
 }
+
+/* Custom Slider Styles */
+.slider {
+  background: linear-gradient(to right, rgba(138, 43, 226, 0.6), rgba(138, 43, 226, 0.3));
+  outline: none;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8a2be2, #da70d6);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(138, 43, 226, 0.4);
+  transition: all 0.2s ease;
+}
+
+.slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(138, 43, 226, 0.6);
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8a2be2, #da70d6);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(138, 43, 226, 0.4);
+  transition: all 0.2s ease;
+}
+
+.slider::-moz-range-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(138, 43, 226, 0.6);
+}
+
+/* Smaller Slider Styles for Blob Controls */
+.slider-small {
+  background: linear-gradient(to right, rgba(138, 43, 226, 0.4), rgba(138, 43, 226, 0.2));
+  outline: none;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.slider-small::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8a2be2, #da70d6);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(138, 43, 226, 0.3);
+  transition: all 0.2s ease;
+}
+
+.slider-small::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 6px rgba(138, 43, 226, 0.5);
+}
+
+.slider-small::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8a2be2, #da70d6);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(138, 43, 226, 0.3);
+  transition: all 0.2s ease;
+}
+
+.slider-small::-moz-range-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 6px rgba(138, 43, 226, 0.5);
+}

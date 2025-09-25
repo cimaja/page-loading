@@ -5,11 +5,13 @@ const nextConfig: NextConfig = {
   compress: true,
   poweredByHeader: false,
   
-  // GitHub Pages configuration
+  // GitHub Pages configuration (only for production builds)
   output: 'export',
   trailingSlash: true,
-  basePath: '/page-loading',
-  assetPrefix: '/page-loading/',
+  ...(process.env.NODE_ENV === 'production' && {
+    basePath: '/page-loading',
+    assetPrefix: '/page-loading/',
+  }),
   images: {
     unoptimized: true
   },
